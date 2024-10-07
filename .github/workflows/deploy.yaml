@@ -6,6 +6,10 @@ on:
 
 jobs:
   build:
+    permissions:
+      id-token: write
+      contents: read
+
     name: Build image
     runs-on: ubuntu-latest
 
@@ -16,8 +20,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-to-assume: arn:aws:iam::975050247140:role/gh-actions-rol
           aws-region: sa-east-1
 
       - name: Login to Amazon ECR
