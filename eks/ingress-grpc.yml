@@ -1,19 +1,12 @@
 apiVersion: networking.k8s.io/v1
-kind: IngressClass
-metadata:
-  name: nginx
-spec:
-  controller: k8s.io/ingress-nginx
----
-apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: simple-bank-ingress
+  name: simple-bank-ingress-grpc
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
 spec:
   rules:
-    - host: simple-bank-api.com
+    - host: simple-bank-gapi.com
     - http:
         paths:
           - path: /
@@ -25,5 +18,5 @@ spec:
                   number: 80
   tls:
     - hosts:
-        - simple-bank-api.com
+        - simple-bank-gapi.com
       secretName: simple-bank-api-tls
